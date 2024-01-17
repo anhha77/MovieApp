@@ -15,7 +15,9 @@ function FMultiCheckbox({ name, options, ...other }) {
             : [...field.value, option];
 
         return (
-          <FormGroup>
+          <FormGroup
+            sx={{ flexGrow: 1, flexDirection: { xs: "column", md: "row" } }}
+          >
             {options.map((option) => (
               <FormControlLabel
                 key={option}
@@ -27,6 +29,7 @@ function FMultiCheckbox({ name, options, ...other }) {
                 }
                 label={option}
                 {...other}
+                sx={{ flexBasis: { xs: "auto", md: "250px" } }}
               />
             ))}
           </FormGroup>

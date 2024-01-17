@@ -23,22 +23,22 @@ const breakPoints = [
   { width: 1200, itemsToShow: 4, pagination: false },
 ];
 
-function DetailMoviePage() {
+function DetailTVPage() {
   const params = useParams();
-  const movieID = params.id;
+  const TVID = params.id;
 
-  const [movieDetail, setMovieDetail] = useState(null);
-  const [movieSimilar, setMovieSimilar] = useState([]);
+  const [TVDetail, setTVDetail] = useState(null);
+  const [TVSimilar, setTVSimilar] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const getDataMovieDetail = async () => {
+    const getDataTVDetail = async () => {
       try {
         setIsLoading(true);
         const response = await apiService.get(
-          `https://api.themoviedb.org/3/movie/${movieID}?api_key=${apiKey}`
+          `https://api.themoviedb.org/3/tv/${TVID}?api_key=${apiKey}`
         );
-        setMovieDetail(response.data);
+        setTVDetail(response.data);
         setIsLoading(false);
       } catch (error) {
         console.log(error);
@@ -46,14 +46,14 @@ function DetailMoviePage() {
       }
     };
 
-    const getDataMovieSimilar = async () => {
+    const getDataTVSimilar = async () => {
       try {
         setIsLoading(true);
         const response = await apiService.get(
-          `https://api.themoviedb.org/3/movie/${movieID}/similar?api_key=${apiKey}`
+          `https://api.themoviedb.org/3/tv/${TVID}/similar?api_key=${apiKey}`
         );
         console.log("hi", response.data.results);
-        setMovieSimilar(response.data.results);
+        setTVSimilar(response.data.results);
         setIsLoading(false);
       } catch (error) {
         console.log(error);
@@ -61,13 +61,13 @@ function DetailMoviePage() {
       }
     };
 
-    getDataMovieDetail();
-    getDataMovieSimilar();
-  }, [movieID]);
+    getDataTVDetail();
+    getDataTVSimilar();
+  }, [TVID]);
 
   return (
     <Box bgcolor="#000" flexGrow={1}>
-      {!movieDetail ? (
+      {!TVDetail ? (
         <LoadingScreen />
       ) : (
         <Stack spacing={3}>
@@ -81,17 +81,14 @@ function DetailMoviePage() {
               justifyContent="center"
               alignItems="center"
             >
-              <Typography variant="h4">{movieDetail["title"]}</Typography>
+              <Typography variant="h4">{TVDetail["name"]}</Typography>
               <Stack
                 spacing={2}
                 direction="row"
                 flexWrap="wrap"
                 justifyContent="center"
               >
-                <Typography variant="p">
-                  {movieDetail["runtime"]} Minutes
-                </Typography>
-                {movieDetail["genres"].map((item, index) => (
+                {TVDetail["genres"].map((item, index) => (
                   <Typography variant="p" key={index}>
                     {item.name}
                   </Typography>
@@ -104,7 +101,7 @@ function DetailMoviePage() {
               <Box
                 sx={{
                   width: "100%",
-                  backgroundImage: `url(${urlToGetImages}${movieDetail["backdrop_path"]})`,
+                  backgroundImage: `url(${urlToGetImages}${TVDetail["backdrop_path"]})`,
                   backgroundSize: "cover",
                   backgroundPosition: "center center",
                   height: {
@@ -118,7 +115,7 @@ function DetailMoviePage() {
               <Box
                 sx={{
                   width: "100%",
-                  backgroundImage: `url(${urlToGetImages}${movieDetail["poster_path"]})`,
+                  backgroundImage: `url(${urlToGetImages}${TVDetail["poster_path"]})`,
                   backgroundSize: "cover",
                   backgroundPosition: "center center",
                   height: {
@@ -136,11 +133,11 @@ function DetailMoviePage() {
                   Release Date:{" "}
                 </Typography>
                 <Typography variant="h6">
-                  {movieDetail["release_date"]}
+                  {TVDetail["first_air_date"]}
                 </Typography>
               </Stack>
-              <Typography variant="p">{movieDetail["tagline"]}</Typography>
-              <Typography variant="p">{movieDetail["overview"]}</Typography>
+              <Typography variant="p">{TVDetail["tagline"]}</Typography>
+              <Typography variant="p">{TVDetail["overview"]}</Typography>
               <Box
                 sx={{
                   borderTop: "1px solid #fff",
@@ -169,31 +166,35 @@ function DetailMoviePage() {
                 </Stack>
               </Box>
 
-              <Box sx={{ padding: "50px 0px" }}>
-                <Typography
-                  gutterBottom={true}
-                  variant="h6"
-                  sx={{
-                    borderBottom: "1px solid rgba(255 ,255, 255, 0.25)",
-                    color: "#fff",
-                  }}
-                >
-                  You May Also Like
-                </Typography>
-                <Box sx={{ marginTop: "20px" }}>
-                  <Carousel breakPoints={breakPoints}>
-                    {movieSimilar.map((item, index) => (
-                      <MovieCard
-                        imageURL={item["backdrop_path"]}
-                        movieName={item["title"]}
-                        key={index}
-                        movieOrTVID={item["id"]}
-                        movieOrTV="movie"
-                      />
-                    ))}
-                  </Carousel>
+              {TVSimilar.length === 0 ? (
+                ""
+              ) : (
+                <Box sx={{ padding: "50px 0px" }}>
+                  <Typography
+                    gutterBottom={true}
+                    variant="h6"
+                    sx={{
+                      borderBottom: "1px solid rgba(255 ,255, 255, 0.25)",
+                      color: "#fff",
+                    }}
+                  >
+                    You May Also Like
+                  </Typography>
+                  <Box sx={{ marginTop: "20px" }}>
+                    <Carousel breakPoints={breakPoints}>
+                      {TVSimilar.map((item, index) => (
+                        <MovieCard
+                          imageURL={item["backdrop_path"]}
+                          movieName={item["name"]}
+                          key={index}
+                          movieOrTVID={item["id"]}
+                          movieOrTV="TV"
+                        />
+                      ))}
+                    </Carousel>
+                  </Box>
                 </Box>
-              </Box>
+              )}
             </Stack>
           </Container>
         </Stack>
@@ -202,4 +203,4 @@ function DetailMoviePage() {
   );
 }
 
-export default DetailMoviePage;
+export default DetailTVPage;

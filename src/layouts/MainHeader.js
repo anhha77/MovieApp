@@ -1,7 +1,8 @@
 import React from "react";
+import AppBarHeader from "../components/AppBarHeader";
 
 function MainHeader() {
-  return <div>This is main header.</div>;
+  return <AppBarHeader />;
 }
 
 export default MainHeader;

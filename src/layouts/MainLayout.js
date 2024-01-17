@@ -1,12 +1,17 @@
+import { Box, Stack } from "@mui/material";
 import React from "react";
 import { Outlet } from "react-router-dom";
+import MainHeader from "../layouts/MainHeader";
+import MainFooter from "../layouts/MainFooter";
 
 function MainLayout() {
   return (
-    <div>
-      This is main layout.
+    <Stack sx={{ minHeight: "100vh" }}>
+      <MainHeader />
       <Outlet />
-    </div>
+      <Box sx={{ flexGrow: 1 }} />
+      <MainFooter />
+    </Stack>
   );
 }
 

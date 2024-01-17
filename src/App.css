@@ -1,0 +1,21 @@
+.social-icon:hover {
+  background-color: "#dfe6e9";
+}
+
+.img-movie-app:hover {
+  transform: scale(1.5);
+}
+
+.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation8.MuiPopover-paper.MuiMenu-paper.MuiMenu-paper.css-f7hv92-MuiPaper-root-MuiPopover-paper-MuiMenu-paper {
+  width: 100%;
+}
+
+.rec.rec-arrow-left:hover:enabled,
+.rec.rec-arrow-right:hover:enabled {
+  background-color: var(--clr-primary-400);
+  box-shadow: 0 0 1px 3px var(--clr-primary-400);
+}
+
+.MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-colorPrimary.MuiInputBase-fullWidth.MuiInputBase-formControl.MuiInputBase-adornedStart.css-gqqq7p-MuiInputBase-root-MuiOutlinedInput-root {
+  max-height: 40px;
+}

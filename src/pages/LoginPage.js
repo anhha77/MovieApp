@@ -1,12 +1,33 @@
 import React from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
-import { Stack, Typography } from "@mui/material";
-import { FTextField } from "../components/form";
-import { Button } from "@mui/base";
+import { Stack } from "@mui/material";
+import { withStyles } from "@mui/styles";
+import { FTextField, FormProvider } from "../components/form";
+import Button from "@mui/material/Button";
+
+const styledBtn = {
+  backgroundColor: "secondary.light",
+  "&:hover": {
+    backgroundColor: "secondary.main",
+  },
+};
+
+const FTextFieldCustom = withStyles({
+  root: {
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
+        borderColor: "#FF8243",
+      },
+      "&:hover fieldset": {
+        borderColor: "#cc571f",
+      },
+    },
+  },
+})(FTextField);
 
 const LoginSchema = Yup.object().shape({
   username: Yup.string().required("Username is required"),
@@ -39,11 +60,13 @@ function LoginPage() {
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Stack spacing={3} sx={{ minWidth: "350px" }}>
-        <Typography variant="h4" textAlign="center">
-          Login
-        </Typography>
-        <FTextField name="username" label="Username" />
-        <Button type="submit" variant="contained">
+        <FTextFieldCustom
+          name="username"
+          label="Username"
+          InputLabelProps={{ style: { color: "#d35400" } }}
+          sx={{ input: { color: "#fff" } }}
+        />
+        <Button type="submit" variant="contained" sx={styledBtn}>
           Login
         </Button>
       </Stack>

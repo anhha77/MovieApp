@@ -3,15 +3,19 @@ import { BrowserRouter } from "react-router-dom";
 import ThemeProvider from "./contexts/ThemeProvider";
 import Router from "./routes";
 import { AuthProvider } from "./contexts/AuthContext";
+import "./App.css";
+import { HanldePage } from "./contexts/HanldePage";
 
 function App() {
   return (
     <AuthProvider>
-      <BrowserRouter>
-        <ThemeProvider>
-          <Router />
-        </ThemeProvider>
-      </BrowserRouter>
+      <HanldePage>
+        <BrowserRouter>
+          <ThemeProvider>
+            <Router />
+          </ThemeProvider>
+        </BrowserRouter>
+      </HanldePage>
     </AuthProvider>
   );
 }
