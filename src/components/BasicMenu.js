@@ -197,12 +197,18 @@ export default function BasicMenu({
               variant="contained"
               sx={styledBtn}
               onClick={() => {
-                setMoviesFilter([]);
-                setTVFilter([]);
-                setPageMovie(1);
-                setPageTV(1);
-                setFilterClick(!filterClick);
-                return navigate("/filterPage");
+                if (
+                  filters.movieGenresList.length !== 0 ||
+                  filters.TVGenresList.length !== 0 ||
+                  filters.searchQuery
+                ) {
+                  setMoviesFilter([]);
+                  setTVFilter([]);
+                  setPageMovie(1);
+                  setPageTV(1);
+                  setFilterClick(!filterClick);
+                  return navigate("/filterPage");
+                }
               }}
             >
               Filter
