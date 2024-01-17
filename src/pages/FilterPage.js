@@ -1,5 +1,5 @@
 import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import apiService from "../app/apiService";
 import MovieCard from "../components/MovieCard";
 import useHandlePage from "../hooks/useHandlePage";

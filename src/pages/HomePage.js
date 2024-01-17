@@ -2,7 +2,6 @@ import { Box, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { getMoviesAndTVList } from "../hooks/useGetMoviesAndTV";
 import LoadingScreen from "../components/LoadingScreen";
-import movieGenres from "../MovieGenres.json";
 import MovieCard from "../components/MovieCard";
 import Carousel from "react-elastic-carousel";
 
@@ -76,10 +75,10 @@ function HomePage() {
   const [popularTVResult, setPopularTVResult] = useState([]);
   const [topRatedTVResult, setTopRatedTVResult] = useState([]);
 
-  const getMovieGenres = (item) => {
-    const result = movieGenres["genres"].find((i) => i.id === item);
-    return result.name;
-  };
+  // const getMovieGenres = (item) => {
+  //   const result = movieGenres["genres"].find((i) => i.id === item);
+  //   return result.name;
+  // };
 
   useEffect(() => {
     const getDataUpMovieComing = async () => {
