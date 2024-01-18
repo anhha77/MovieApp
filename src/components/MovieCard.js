@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import useFavorite from "../hooks/useFavorite";
 
 const styleCardContent = {
   position: "absolute",
@@ -56,6 +57,8 @@ export default function MovieCard({
 }) {
   const location = useLocation();
 
+  const { itemFavorite, setItemFavorite, setDevice } = useFavorite();
+
   const url =
     movieOrTV === "movie"
       ? `/movies/movieDetailModal/${movieOrTVID}`
@@ -72,7 +75,17 @@ export default function MovieCard({
           <Typography variant="h6" textAlign="center">
             {movieName}
           </Typography>
-          <Button variant="contained" sx={styleBtn}>
+          <Button
+            variant="contained"
+            sx={styleBtn}
+            onClick={() => {
+              if (!itemFavorite.includes(movieOrTVID)) {
+                setItemFavorite([...itemFavorite, movieOrTVID]);
+              }
+
+              setDevice(movieOrTV === "movie" ? "movie" : "tv");
+            }}
+          >
             Favorite
             <FavoriteIcon sx={{ marginLeft: "15px" }} />
           </Button>

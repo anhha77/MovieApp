@@ -5,16 +5,19 @@ import Router from "./routes";
 import { AuthProvider } from "./contexts/AuthContext";
 import "./App.css";
 import { HanldePage } from "./contexts/HanldePage";
+import { FavoriteContext } from "./contexts/FavoriteContext";
 
 function App() {
   return (
     <AuthProvider>
       <HanldePage>
-        <BrowserRouter>
-          <ThemeProvider>
-            <Router />
-          </ThemeProvider>
-        </BrowserRouter>
+        <FavoriteContext>
+          <BrowserRouter>
+            <ThemeProvider>
+              <Router />
+            </ThemeProvider>
+          </BrowserRouter>
+        </FavoriteContext>
       </HanldePage>
     </AuthProvider>
   );

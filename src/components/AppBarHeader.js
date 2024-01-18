@@ -21,6 +21,8 @@ import useAuth from "../hooks/useAuth";
 import LogoutIcon from "@mui/icons-material/Logout";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useNavigate } from "react-router-dom";
+import FavoriteMenu from "./FavoriteMenu";
+import useFavorite from "../hooks/useFavorite";
 
 const apiKey = "18f8661b3ab6033ea111c50a44f591bb";
 
@@ -71,6 +73,7 @@ export default function AppBarHeader() {
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const [hamburgerMenuAnchorEl, setHamburgerMenuAnchorEl] =
     React.useState(null);
+  const [favoriteAnchorEl, setFavoriteAnchorEl] = React.useState(null);
 
   const navigate = useNavigate();
 
@@ -80,6 +83,7 @@ export default function AppBarHeader() {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const isHamburgerMenuOpen = Boolean(hamburgerMenuAnchorEl);
+  const isFavoriteMenuOpen = Boolean(favoriteAnchorEl);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -105,6 +109,17 @@ export default function AppBarHeader() {
   const handleHamburgerMenuClose = () => {
     setHamburgerMenuAnchorEl(null);
   };
+
+  const hanldeFavoriteMenuOpen = (event) => {
+    setFavoriteAnchorEl(event.currentTarget);
+  };
+
+  const handleFavoriteMenuClose = () => {
+    setFavoriteAnchorEl(null);
+  };
+
+  const { itemFavorite, setItemFavorite, device, movieDetailList } =
+    useFavorite();
 
   React.useEffect(() => {
     const getMovieGenres = async () => {
@@ -190,14 +205,7 @@ export default function AppBarHeader() {
         </IconButton>
         <p>{auth.user.username}</p>
       </MenuItem>
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
-            <FavoriteIcon />
-          </Badge>
-        </IconButton>
-        <p>Favorite</p>
-      </MenuItem>
+
       <MenuItem onClick={() => navigate("/login", { replace: true })}>
         <IconButton
           size="large"
@@ -244,16 +252,26 @@ export default function AppBarHeader() {
           </Typography>
 
           <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: "none", md: "flex" } }}>
+          <Box sx={{ display: "flex" }}>
             <IconButton
               size="large"
               aria-label="show 17 new notifications"
               color="inherit"
+              onClick={hanldeFavoriteMenuOpen}
             >
-              <Badge badgeContent={0} color="error">
+              <Badge badgeContent={movieDetailList.length} color="error">
                 <FavoriteIcon />
               </Badge>
             </IconButton>
+            <FavoriteMenu
+              anchorEl={favoriteAnchorEl}
+              open={isFavoriteMenuOpen}
+              handleClose={handleFavoriteMenuClose}
+              favoriteItem={itemFavorite}
+              device={device}
+            />
+          </Box>
+          <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <IconButton
               size="large"
               edge="end"
