@@ -52,7 +52,7 @@ function DetailTVPage() {
         const response = await apiService.get(
           `https://api.themoviedb.org/3/tv/${TVID}/similar?api_key=${apiKey}`
         );
-        console.log("hi", response.data.results);
+        // console.log("hi", response.data.results);
         setTVSimilar(response.data.results);
         setIsLoading(false);
       } catch (error) {

@@ -57,7 +57,8 @@ export default function MovieCard({
 }) {
   const location = useLocation();
 
-  const { itemFavorite, setItemFavorite, setDevice } = useFavorite();
+  const { itemFavorite, setItemFavorite, device, setDevice, setIsInsert } =
+    useFavorite();
 
   const url =
     movieOrTV === "movie"
@@ -81,9 +82,9 @@ export default function MovieCard({
             onClick={() => {
               if (!itemFavorite.includes(movieOrTVID)) {
                 setItemFavorite([...itemFavorite, movieOrTVID]);
+                setDevice([...device, movieOrTV === "movie" ? "movie" : "tv"]);
+                setIsInsert(true);
               }
-
-              setDevice(movieOrTV === "movie" ? "movie" : "tv");
             }}
           >
             Favorite

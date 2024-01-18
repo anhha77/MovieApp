@@ -4,8 +4,9 @@ const handleFavoriteContext = createContext();
 
 function FavoriteContext({ children }) {
   const [itemFavorite, setItemFavorite] = useState([]);
-  const [device, setDevice] = useState(null);
+  const [device, setDevice] = useState([]);
   const [movieDetailList, setMovieDetailList] = useState([]);
+  const [isInsert, setIsInsert] = useState(null);
 
   return (
     <handleFavoriteContext.Provider
@@ -16,6 +17,8 @@ function FavoriteContext({ children }) {
         setDevice,
         movieDetailList,
         setMovieDetailList,
+        isInsert,
+        setIsInsert,
       }}
     >
       {children}
