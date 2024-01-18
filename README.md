@@ -10,8 +10,8 @@ React, react-router-dom, react-hook-form, axios, material ui v5
 
 ## Data for movie and tv shows
 
-All data for movies and tv shows are taken from the following link: `[https://www.themoviedb.org/?language=vi](https://www.themoviedb.org/?language=vi)`
+All data for movies and tv shows are taken from the following link: [https://www.themoviedb.org/?language=vi](https://www.themoviedb.org/?language=vi)
 
 ## Demo Link
 
-`[https://movie-app772001.netlify.app/](https://movie-app772001.netlify.app/)`
+[https://movie-app772001.netlify.app/](https://movie-app772001.netlify.app/)
