@@ -6,7 +6,7 @@ A front end Movie App that let people login and search movies or TV shows they w
 
 ## Technologies
 
-React, react-router-dom, react-hook-form, axios, material ui v5
+React, react-router-dom, react-hook-form, axios, material ui v5.
 
 ## Data for movie and tv shows
 
