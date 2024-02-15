@@ -154,7 +154,7 @@ export default function AppBarHeader() {
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{
-        vertical: "top",
+        vertical: "bottom",
         horizontal: "right",
       }}
       id={menuId}
@@ -168,7 +168,12 @@ export default function AppBarHeader() {
       sx={{ width: "200px" }}
     >
       <MenuItem>{auth.user.username}</MenuItem>
-      <MenuItem onClick={() => navigate("/login", { replace: true })}>
+      <MenuItem
+        onClick={() => {
+          handleMenuClose();
+          auth.logout(() => navigate("/login", { replace: true }));
+        }}
+      >
         Log out
         <LogoutIcon sx={{ marginLeft: "15px" }} />
       </MenuItem>
@@ -180,7 +185,7 @@ export default function AppBarHeader() {
     <Menu
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{
-        vertical: "top",
+        vertical: "bottom",
         horizontal: "right",
       }}
       id={mobileMenuId}
@@ -206,7 +211,12 @@ export default function AppBarHeader() {
         <p>{auth.user.username}</p>
       </MenuItem>
 
-      <MenuItem onClick={() => navigate("/login", { replace: true })}>
+      <MenuItem
+        onClick={() => {
+          handleMobileMenuClose();
+          auth.logout(() => navigate("/login", { replace: true }));
+        }}
+      >
         <IconButton
           size="large"
           aria-label="show 17 new notifications"
@@ -220,7 +230,15 @@ export default function AppBarHeader() {
   );
 
   return (
-    <Box sx={{ flexGrow: 1, maxHeight: "64px" }}>
+    <Box
+      sx={{
+        flexGrow: 1,
+        maxHeight: "64px",
+        zIndex: 10,
+        position: "sticky",
+        top: 0,
+      }}
+    >
       <AppBar position="static">
         <Toolbar>
           <IconButton

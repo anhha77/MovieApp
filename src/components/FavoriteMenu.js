@@ -59,6 +59,14 @@ export default function FavoriteMenu({
           anchorEl={anchorEl}
           open={open}
           onClose={handleClose}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "right",
+          }}
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
           MenuListProps={{
             "aria-labelledby": "basic-button",
           }}
@@ -68,6 +76,7 @@ export default function FavoriteMenu({
               <Stack direction="row" spacing={1}>
                 <Box
                   onClick={() => {
+                    handleClose();
                     if (item.hasOwnProperty("title")) {
                       navigate(`/movies/${item["id"]}`);
                     } else {
@@ -79,9 +88,16 @@ export default function FavoriteMenu({
                     backgroundSize: "cover",
                     backgroundPosition: "center center",
                     width: "50px",
+                    flexShrink: 0,
                   }}
                 ></Box>
-                <Typography variant="p" alignSelf="center">
+                <Typography
+                  variant="p"
+                  alignSelf="center"
+                  noWrap={true}
+                  flexBasis="150px"
+                  flexShrink={0}
+                >
                   {item.hasOwnProperty("title") ? item["title"] : item["name"]}
                 </Typography>
                 <IconButton
